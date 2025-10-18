@@ -39,3 +39,8 @@ terraform.rc
 .DS_Store
 __pycache__/
 *.pyc
+helm.exe
+eksctl.exe
+windows-amd64/
+helm-*.zip
+eksctl*.zip
