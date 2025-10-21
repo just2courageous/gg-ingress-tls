@@ -1,0 +1,11 @@
+flowchart LR
+  A[User Browser\nhttps://app.courageerhabor.com] -->|DNS| B[Route 53\nA/ALIAS]
+  B --> C[ALB (Ingress)\n:80 / :443\nACM cert]
+  C -->|/ -> demo-svc:80| D[Service: demo-svc\nClusterIP]
+  D --> E[Pods: demo (NGINX)]
+  subgraph EKS
+    C
+    D
+    E
+  end
+  note right of B: Created by ExternalDNS

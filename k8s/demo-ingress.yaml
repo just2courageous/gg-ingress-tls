@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: demo-ing
+  namespace: demo
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80},{"HTTPS":443}]'
+    alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:us-east-2:399717050894:certificate/f990cd37-92d0-4234-addd-2f4b3e1a6477"
+    external-dns.alpha.kubernetes.io/hostname: "app.courageerhabor.com"
+spec:
+  rules:
+  - host: app.courageerhabor.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: demo-svc
+            port:
+              number: 80
+  tls:
+  - hosts: ["app.courageerhabor.com"]
+    secretName: placeholder-not-used-with-acm
