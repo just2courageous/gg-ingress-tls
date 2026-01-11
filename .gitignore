@@ -44,3 +44,4 @@ eksctl.exe
 windows-amd64/
 helm-*.zip
 eksctl*.zip
+.venv/

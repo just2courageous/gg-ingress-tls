@@ -1,0 +1,30 @@
+digraph G {
+  graph [rankdir=LR, splines=ortho, nodesep=1.1, ranksep=1.4, pad=1.0, fontsize=12];
+  node  [shape=box, fontsize=11];
+  edge  [fontsize=10];
+
+  browser [label="User Browser\nhttps://app.<domain>"];
+  r53 [label="Route 53\nHosted Zone"];
+
+  subgraph cluster_aws {
+    label="AWS";
+    acm [label="ACM\nTLS Cert"];
+    alb [label="ALB\n(80/443)"];
+    eks [label="EKS\nCluster"];
+
+    subgraph cluster_k8s {
+      label="Kubernetes";
+      ing [label="Ingress\n(ALB annotations)"];
+      svc [label="Service\nClusterIP"];
+      pods [label="Pods\nnginx demo"];
+    }
+  }
+
+  browser -> r53 [label="DNS lookup"];
+  r53 -> alb [label="A/ALIAS → ALB"];
+  acm -> alb [label="TLS"];
+  alb -> ing [label="forwards"];
+  ing -> svc;
+  svc -> pods;
+  eks -> pods [label="runs"];
+}
