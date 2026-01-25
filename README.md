@@ -1,6 +1,6 @@
 # gg-ingress-tls
 
-**Goal:** Expose an app on **EKS (Elastic Kubernetes Service)** via **ALB (Application Load Balancer) Ingress**, with **DNS (Domain Name System)** managed in **Route 53 (AWS managed DNS (Domain Name System))** using **ExternalDNS (External Domain Name System)**, and **TLS (Transport Layer Security)** via **ACM (AWS Certificate Manager)**.
+**Goal:** Expose an app on **EKS** via **ALB Ingress**, with **DNS** managed in **Route 53 (AWS managed DNS (Domain Name System))** using **ExternalDNS**, and **TLS (Transport Layer Security)** via **ACM (AWS Certificate Manager)**.
 
 ## Architecture diagram
 ![GG Ingress TLS architecture](docs/diagrams/gg-ingress-tls-arch.png)
@@ -15,12 +15,12 @@ Editable source:
 - **Host:** app.courageerhabor.com (delegated subdomain)
 
 ## Repo structure
-- `infra/` — **eksctl (EKS control CLI)** parity config/pointer (this repo does **not** store Terraform (Infrastructure as Code) for EKS (Elastic Kubernetes Service))
-- `k8s/` — Kubernetes (Container Orchestration) manifests
-- `scripts/` — Bash (Bourne Again SHell) helpers
+- `infra/` — **eksctl** parity config/pointer (this repo does **not** store Terraform (Infrastructure as Code) for EKS (Elastic Kubernetes Service))
+- `k8s/` — Kubernetes manifests
+- `scripts/` — Bash helpers
 - `docs/screenshots/` — proofs
 - `docs/diagrams/` — diagrams
-- `.github/` — CI (Continuous Integration) config (if present)
+- `.github/` — CI config (if present)
 
 ## Proofs (screenshots)
 - docs/screenshots/06-eksctl-create-finished.png
@@ -34,5 +34,5 @@ Editable source:
 - docs/screenshots/23-targets-healthy.png
 
 ## Cleanup
-- Delete the Ingress (Kubernetes Ingress) to remove the ALB (Application Load Balancer).
-- Optionally delete the EKS (Elastic Kubernetes Service) cluster to stop costs.
+- Delete the Ingress (Kubernetes Ingress) to remove the ALB.
+- Optionally delete the EKS cluster to stop costs.
